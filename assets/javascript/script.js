@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const userInput = document.getElementById('user-input');
     const levelDisplay = document.getElementById('level');
     const wpmDisplay = document.getElementById('wpm');
+    const retryButton = document.getElementById('retry-btn');
+    const instructionsBtn = document.getElementById('instructions-btn');
+    const instructionsModal = new bootstrap.Modal(document.getElementById('instructionsModal'));
 
     let startTime;
     let endTime;
@@ -100,6 +103,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     difficultySelect.addEventListener('change', updateSampleText);
+
+    retryButton.addEventListener('click', function () {
+        updateSampleText();
+        userInput.value = '';
+        startTime = null;
+        endTime = null;
+        timeDisplay.textContent = 'Time: 0.00 seconds';
+        wpmDisplay.textContent = 'WPM: 0.00';
+    });
+
+    instructionsBtn.addEventListener('click', function () {
+        instructionsModal.show();
+    });
 
     // Initialize with a random text from the default difficulty level
     updateSampleText();
